@@ -8,7 +8,7 @@ pipeline {
   environment {
     SSH_KEY = '/var/lib/jenkins/.ssh/id_rsa'       // ✅ Jenkins private SSH key path (to connect to Ansible server)
     ANSIBLE_USER = 'root'                          // 👤 Username for Ansible server login
-    ANSIBLE_IP = '13.235.133.158'                    // 🌐 Ansible server's public IP
+    ANSIBLE_IP = '3.81.158.244'                    // 🌐 Ansible server's public IP
     REMOTE_PATH = '/root/cicdk8'                 // 📁 Folder in Ansible server to copy code into
   }
 
@@ -32,6 +32,7 @@ pipeline {
           echo "📦 Copying project code to Ansible server..."
 
           # ✅ Make sure the remote folder exists
+          # [jenkins@wn1 .ssh]$ ssh -i /var/lib/jenkins/.ssh/id_ed25519 root@3.81.158.244  
           ssh -i $SSH_KEY $ANSIBLE_USER@$ANSIBLE_IP "mkdir -p $REMOTE_PATH"
 
           # ✅ Copy current project code to Ansible server
