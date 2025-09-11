@@ -32,10 +32,11 @@ pipeline {
           echo "📦 Copying project code to Ansible server..."
 
           # ✅ Make sure the remote folder exists
-          # [jenkins@wn1 .ssh]$ ssh -i /var/lib/jenkins/.ssh/id_ed25519 root@3.81.158.244  
+          # example for below line ssh -i /var/lib/jenkins/.ssh/id_ed25519 root@3.81.158.244  
           ssh -i $SSH_KEY $ANSIBLE_USER@$ANSIBLE_IP "mkdir -p $REMOTE_PATH"
 
           # ✅ Copy current project code to Ansible server
+          # -r → recursive, meaning copy entire directories.
           scp -i $SSH_KEY -r . $ANSIBLE_USER@$ANSIBLE_IP:$REMOTE_PATH
 
           echo "✅ Code successfully copied to Ansible server at $REMOTE_PATH"
