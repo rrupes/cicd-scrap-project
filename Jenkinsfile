@@ -16,7 +16,7 @@ pipeline {
 
     stage('Clone') {
       steps {
-        git 'https://github.com/Sanjeev14-yadav/cicd-scrap-project.git'
+        git 'https://github.com/rrupes/cicd-scrap-project.git'
       }
     }
 
