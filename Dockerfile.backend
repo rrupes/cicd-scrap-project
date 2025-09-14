@@ -8,7 +8,7 @@ COPY backend/scrapper.py backend/requirements.txt ./
 RUN apt-get update && apt-get install -y gcc libmariadb-dev vim && apt-get clean \
     && pip install --no-cache-dir -r requirements.txt
 
-ENV DB_HOST=cicdrdsdb.cjgiuuuoiuzk.ap-south-1.rds.amazonaws.com \
+ENV DB_HOST=dbtenders.c8nwwmsoisdc.us-east-1.rds.amazonaws.com \
     DB_USER=admin \
     DB_PASSWORD=password123 \
     DB_NAME=dbtenders \
