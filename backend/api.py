@@ -8,7 +8,7 @@ CORS(app, origins="*", supports_credentials=True)
 # --- Database Configuration ---
 
 db_config = {
-     'host': 'cicdrdsdb.cjgiuuuoiuzk.ap-south-1.rds.amazonaws.com',
+     'host': 'dbtenders.c8nwwmsoisdc.us-east-1.rds.amazonaws.com',
      'user': 'admin',
      'password': 'password123',
      'database': 'dbtenders'
