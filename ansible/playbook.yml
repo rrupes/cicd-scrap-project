@@ -2,10 +2,17 @@
 - name: Build and Push Docker Images and then run this playbook
   hosts: localhost
   become: yes
+  vars:
+    dockerhub_user: "rrupes"
+    dockerhub_password: "Kaju@9136"
   tasks:
+    - name: docker login to dockerhub
+      community.docker.docker_login:
+        username: "{{ dockerhub_user }}"
+        password: "{{ dockerhub_password }}"
     - name: Build Backend Docker Image
       community.docker.docker_image:
-        name: sanjeevy/code-backend1
+        name: rrupes/code-backend1
         build:
           path: /root/cicdk8/
           dockerfile: Dockerfile.backend
@@ -14,7 +21,7 @@
         source: build
     - name: Build API Docker Image (Flask + Nginx)
       community.docker.docker_image:
-        name: sanjeevy/api-backend1
+        name: rrupes/api-backend1
         build:
           path: /root/cicdk8/
           dockerfile: Dockerfile.api
@@ -23,23 +30,22 @@
         source: build
     - name: Build Frontend Docker Image
       community.docker.docker_image:
-        name: sanjeevy/frontend1
+        name: rrupes/frontend1
         build:
           path: /root/cicdk8/
           dockerfile: Dockerfile.frontend
         tag: latest
         push: true
         source: build
-- name: Copy YAML files to K8s EC2 Node
-  hosts: k8s
-  tasks:
-    - name: Copy YAML files to /home/ubuntu/
-      copy:
-        src: /root/cicdk8/k8/
-        dest: /home/ubuntu/k8s/
-        mode: '0644'
-        remote_src: no
-
+#- name: Copy YAML files to K8s EC2 Node
+ # hosts: k8s
+  #tasks:
+   # - name: Copy YAML files to /home/ubuntu/
+    #  copy:
+     #   src: /root/cicdk8/k8/
+      #  dest: /home/ubuntu/k8s/
+       # mode: '0644'
+        #remote_src: no
 #- name: Apply Kubernetes Deployments from Ansible
 #  hosts: k8s
 #  become: yes
